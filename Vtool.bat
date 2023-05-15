@@ -2,7 +2,7 @@
 :: X.0.0 = Big Changes
 :: 0.X.0 = New features
 :: 0.0.X = Small Fixes
-SET ScriptVersion=Version 1.0.0
+SET ScriptVersion=Version 1.1.1
 
 
 
@@ -17,6 +17,13 @@ IF not exist "%CD%\Data\ApiKey\" (
 )
 IF not exist "%CD%\Data\ApiKey\Apikey.txt" (
     GOTO VERIFYVTAPI
+)
+
+
+
+:: Move Virus Total Binary to Data Folder
+IF exist "vt.exe" (
+    move "vt.exe" "Data\vt.exe"
 )
 
 
@@ -62,10 +69,10 @@ IF not exist "%CD%\Data\Logs" mkdir "%CD%\Data\Logs"
 
 
 
-:: Vtool Menu
+:: Vtool Script Menu
 :MENU
 CLS
-ECHO          [96mVtool - %ScriptVersion%[0m
+ECHO          [96mVtool Script - %ScriptVersion%[0m
 ECHO.
 ECHO 1 - IP Analysis
 ECHO 2 - IP Analysis (File Input)
@@ -507,20 +514,31 @@ GOTO SETTINGS
 CLS
 ECHO          H - Help Section
 ECHO.
-ECHO 1- In order to search for multiples IPs, Hashes or Domains, you use comma "," between values or just space " ", Example:
 ECHO.
-ECHO + IPs 
-ECHO 10.0.0.100 , 10.0.0.101 , 10.0.0.102
+ECHO (1) To use  1 - IP Analysis ^| 4 - Domain Analysis ^| 7 - Hash Analysis
+ECHO         Use a space " " between inputs:
+ECHO             virustotal.com thehackernews.com
+ECHO             9b02dd2a1a15e94922be3f85129083ac 3466ffaf086a29b8132e9e10d7111492
+ECHO             18.154.144.113 216.239.38.21 13.107.42.14 142.250.79.46 151.101.65.69
 ECHO.
-ECHO Or
 ECHO.
-ECHO 10.0.0.100 10.0.0.101 10.0.0.102
+ECHO (2) To use  2- IP Analysis (File Input) ^| 3 - IP Analysis.. ^| 5 - Domain Analysis.. ^| 6 - Domain Analysis.. ^| 8 - Hash Analysis..
+ECHO         Insert a file path with NO quotation marks:
+ECHO             list.txt
+ECHO             \Data\list.txt 
+ECHO. 
 ECHO.
-ECHO + Domains
-ECHO google.com , bing.com 
+ECHO (3) About  S - Settings
+ECHO         In this option you can set your regional settings. It is necessary to use correct parameters in order to avoid erros when the script is saving '.csv' file into your system.
+ECHO. 
 ECHO.
-ECHO + Hashes
-ECHO 1079a055f110d54ba12f08bd6b671f6c , f0d01cda4b9b4db889a55abef4b50f180ee138f1 
+ECHO (4) Enjoy it?
+ECHO         Give a Recommendation at: linkedin.com/in/viniguirodri
+ECHO.
+ECHO.
+ECHO (*) Virus Total CLI
+ECHO         https://github.com/VirusTotal/vt-cli
+ECHO.
 ECHO.
 PAUSE
 GOTO MENU
@@ -558,7 +576,7 @@ CLS
 ECHO          D - API Key Daily Quota
 ECHO.
 ECHO.
-Data\vt.exe user -k %ApiKey% --include=apikey,email,quotas.api_requests_daily.used,status %ApiKey%
+Data\vt.exe user -k %ApiKey% --include=apikey,email,quotas.api_requests_daily,status %ApiKey%
 ECHO.
 ECHO.
 PAUSE
