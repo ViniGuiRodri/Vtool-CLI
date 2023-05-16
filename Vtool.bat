@@ -2,7 +2,7 @@
 :: X.0.0 = Big Changes
 :: 0.X.0 = New features
 :: 0.0.X = Small Fixes
-SET ScriptVersion=Version 1.1.1
+SET ScriptVersion=Version 1.1.2
 
 
 
@@ -17,13 +17,6 @@ IF not exist "%CD%\Data\ApiKey\" (
 )
 IF not exist "%CD%\Data\ApiKey\Apikey.txt" (
     GOTO VERIFYVTAPI
-)
-
-
-
-:: Move Virus Total Binary to Data Folder
-IF exist "vt.exe" (
-    move "vt.exe" "Data\vt.exe"
 )
 
 
@@ -66,6 +59,13 @@ IF %RegionOption%==2 (
 IF not exist "%CD%\Data\Temp" mkdir "%CD%\Data\Temp"
 IF not exist "%CD%\Results" mkdir "%CD%\Results"
 IF not exist "%CD%\Data\Logs" mkdir "%CD%\Data\Logs"
+
+
+
+:: Move Virus Total Binary to Data Folder
+IF exist "vt.exe" (
+    move "vt.exe" "Data\vt.exe"
+)
 
 
 
@@ -439,7 +439,46 @@ GOTO %Return%
 
 
 
-:: Script Settings
+:: A - API Key Change
+:VERIFYVTAPI
+CLS
+ECHO          A - API Key Change
+ECHO.
+SET /p ApiKeyValue=Paste your Virus Total API Key: 
+IF "%ApiKeyValue%"=="0" GOTO MENU 
+IF "%ApiKeyValue:~63%"=="" (
+    ECHO.
+    ECHO Type a valid API value.   This one doesn`t has 64 characters.
+    ECHO.
+    ECHO.
+    PAUSE
+    GOTO VERIFYVTAPI
+)
+ECHO %ApiKeyValue% > "Data\ApiKey\ApiKey.txt"
+ECHO.
+ECHO Success "%ApiKeyValue%" was saved to "\Data\ApiKey\ApiKey.txt"
+ECHO.
+ECHO.
+PAUSE
+GOTO INITIALSETTINGS
+
+
+
+:: D - API Key Daily Quota
+:APIDAILYQUOTA
+CLS
+ECHO          D - API Key Daily Quota
+ECHO.
+ECHO.
+Data\vt.exe user -k %ApiKey% --include=apikey,email,quotas.api_requests_daily,status %ApiKey%
+ECHO.
+ECHO.
+PAUSE
+GOTO MENU
+
+
+
+:: S - Settings
 :SETTINGS
 CLS
 SET Mo1=%date:~4,2%
@@ -538,45 +577,6 @@ ECHO.
 ECHO.
 ECHO (*) Virus Total CLI
 ECHO         https://github.com/VirusTotal/vt-cli
-ECHO.
-ECHO.
-PAUSE
-GOTO MENU
-
-
-
-:: A - API Key Change
-:VERIFYVTAPI
-CLS
-ECHO          A - API Key Change
-ECHO.
-SET /p ApiKeyValue=Paste your Virus Total API Key: 
-IF "%ApiKeyValue%"=="0" GOTO MENU 
-IF "%ApiKeyValue:~63%"=="" (
-    ECHO.
-    ECHO Type a valid API value.   This one doesn`t has 64 characters.
-    ECHO.
-    ECHO.
-    PAUSE
-    GOTO VERIFYVTAPI
-)
-ECHO %ApiKeyValue% > "Data\ApiKey\ApiKey.txt"
-ECHO.
-ECHO Success "%ApiKeyValue%" was saved to "\Data\ApiKey\ApiKey.txt"
-ECHO.
-ECHO.
-PAUSE
-GOTO INITIALSETTINGS
-
-
-
-:: D - API Key Daily Quota
-:APIDAILYQUOTA
-CLS
-ECHO          D - API Key Daily Quota
-ECHO.
-ECHO.
-Data\vt.exe user -k %ApiKey% --include=apikey,email,quotas.api_requests_daily,status %ApiKey%
 ECHO.
 ECHO.
 PAUSE
