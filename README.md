@@ -3,7 +3,7 @@ Welcome to Vtool Script Project!
 
 <img src="/Images/Vtool%20Script.PNG" width="1000">
 
-To start using the batch script, clone or download this project to your system and open "Vtool.bat".
+To start using it, clone or download this project to your system and open "Vtool.bat".
 
 
 ## H - Help Section
