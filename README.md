@@ -1,7 +1,7 @@
 # Vtool
-![](/Images/Vtool%20Script.PNG)
-
 Welcome to Vtool Script Project!
+<img src=/Images/Vtool%20Script.PNG" width=300>
+
 
 To start using the script, clone or download this project to your system and open "Vtool.bat".
 
