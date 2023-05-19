@@ -1,9 +1,10 @@
-# Vtool
+# Vtool Script
 Welcome to Vtool Script Project!
-<img src=/Images/Vtool%20Script.PNG" width=300>
+
+<img src="/Images/Vtool%20Script.PNG" width="1000">
 
 
-To start using the script, clone or download this project to your system and open "Vtool.bat".
+To start using the batch script, clone or download this project to your system and open "Vtool.bat".
 
 
 H - Help Section
@@ -26,7 +27,7 @@ H - Help Section
  
 
  (4) Enjoy it?
-         Give a Recommendation at: linkedin.com/in/viniguirodri
+         Give a Recommendation at: https://linkedin.com/in/viniguirodri
 
 
  (*) Virus Total CLI
