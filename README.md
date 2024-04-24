@@ -34,6 +34,10 @@ Use a space " " between inputs:
  In this option you can set your regional settings. It is necessary to use correct parameters in order to avoid erros when the script is saving the '.csv' file into your system.
  
 
+ ## Note
+ This script can write XLSX files to your system when using bulking options. Because of this, Vtool script can potencially be detected as dangerous on Windows systems.
+ 
+
  ## Enjoy it?
  Give a Recommendation at: https://linkedin.com/in/viniguirodri
 
